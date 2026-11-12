@@ -101,6 +101,18 @@ export const experience: Job[] = [
       { label: "Instagram", href: "https://www.instagram.com/produit.academy/" },
     ],
   },
+  {
+    role: "Content Creator",
+    org: "Qubes.AI",
+    points: [
+      "Worked with Qubes.AI, an AI startup, creating content for its Instagram.",
+      "Made short-form reels explaining AI ideas, such as how loop engineering takes AI automation past one-shot prompts.",
+    ],
+    links: [
+      { label: "Reel", href: "https://www.instagram.com/reel/DbdiOCsJi7N/" },
+      { label: "Instagram", href: "https://www.instagram.com/qubes.ai/" },
+    ],
+  },
 ];
 
 export const training = [
