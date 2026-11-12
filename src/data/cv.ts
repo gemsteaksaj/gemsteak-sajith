@@ -71,7 +71,15 @@ export const skillTree: SkillBranch[] = [
   },
 ];
 
-export const experience = [
+export type Job = {
+  role: string;
+  org: string;
+  points: string[];
+  /** Buttons under the signpost, e.g. the org's socials or a talk/podcast. */
+  links?: { label: string; href: string }[];
+};
+
+export const experience: Job[] = [
   {
     role: "Founder & Lead Developer",
     org: "Gemsteak Studios",
@@ -81,9 +89,17 @@ export const experience = [
     ],
   },
   {
-    role: "Co-Founder & Developer",
+    role: "Team Member",
     org: "Produit Academy",
-    points: [] as string[],
+    points: [
+      "Worked with Produit Academy, an online tuition platform offering 1:1 classes and academic support for school students.",
+      "Appeared on the academy's podcast: \"Why are students losing interest in India's education system?\"",
+    ],
+    links: [
+      { label: "Podcast", href: "https://youtu.be/-nnxExAKWhk" },
+      { label: "YouTube", href: "https://www.youtube.com/@produit-academy" },
+      { label: "Instagram", href: "https://www.instagram.com/produit.academy/" },
+    ],
   },
 ];
 

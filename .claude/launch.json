@@ -12,6 +12,18 @@
         "4321"
       ],
       "port": 4321
+    },
+    {
+      "name": "gemsteak-built",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "preview",
+        "--",
+        "--port",
+        "4330"
+      ],
+      "port": 4330
     }
   ]
 }

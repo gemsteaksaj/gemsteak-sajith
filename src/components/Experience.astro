@@ -47,6 +47,15 @@ import { experience } from "../data/cv";
                   ))}
                 </ul>
               )}
+              {job.links && job.links.length > 0 && (
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {job.links.map((l) => (
+                    <a class="btn-stone text-sm" href={l.href} target="_blank" rel="noopener noreferrer">
+                      {l.label} ▶
+                    </a>
+                  ))}
+                </div>
+              )}
             </article>
           </li>
         );
