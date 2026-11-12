@@ -20,7 +20,7 @@ const links = hero.contacts.filter((c) => c.href);
           <a class="btn-stone text-sm" href={c.href!} target={c.href!.startsWith("http") ? "_blank" : undefined} rel={c.href!.startsWith("http") ? "noopener noreferrer" : undefined}>
             <span aria-hidden="true">{c.icon}</span>
             <span class="sr-only">{c.label}</span>
-            <span aria-hidden="true" class="hidden sm:inline">{c.label.replace("YouTube: ", "")}</span>
+            <span aria-hidden="true" class="hidden sm:inline">{c.label.replace("Instagram: ", "")}</span>
           </a>
         </li>
       ))}
