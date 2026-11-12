@@ -1,0 +1,29 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { story } from "../data/cv";
+---
+
+<section id="story" class="relative mx-auto max-w-5xl px-4 py-24" aria-labelledby="story-title">
+  <SectionHead id="story-title" title={story.heading} kicker="Chapter I · The Lore" icon="📜" tone="gold" iconBg="var(--color-gold)" />
+
+  <!-- quest board: stone slab with a pinned parchment -->
+  <div class="panel-stone px-5 pb-8 pt-12 sm:px-10 sm:pb-12 sm:pt-14" data-reveal>
+    <span class="rivet left-4 top-4"></span>
+    <span class="rivet right-4 top-4"></span>
+    <span class="rivet bottom-4 left-4"></span>
+    <span class="rivet bottom-4 right-4"></span>
+
+    <!-- carved plaque -->
+    <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-xl border-4 border-ink bg-slate px-5 py-1.5 font-display text-lg tracking-widest text-white shadow-[0_4px_0_var(--color-ink)] [text-shadow:0_2px_0_var(--color-ink)]">
+      QUEST BOARD
+    </div>
+
+    <article class="parchment mx-auto max-w-3xl -rotate-[0.6deg] px-6 py-8 sm:px-10 sm:py-10">
+      <span class="pin"></span>
+      <p class="text-[1.06rem] font-semibold leading-relaxed sm:text-lg first-letter:float-left first-letter:mr-2 first-letter:font-display first-letter:text-6xl first-letter:leading-[0.85] first-letter:text-ruby">
+        {story.body}
+      </p>
+      <p class="mt-6 text-right font-display text-xl text-ruby-dark">— Sajith KP</p>
+    </article>
+  </div>
+</section>

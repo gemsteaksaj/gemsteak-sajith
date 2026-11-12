@@ -1,0 +1,29 @@
+---
+// Training Grounds (education). Guilds & achievements moved into the Archives vault (src/data/vault.ts).
+import SectionHead from "./SectionHead.astro";
+import { training } from "../data/cv";
+---
+
+<section id="training" class="relative mx-auto max-w-3xl px-4 py-24" aria-labelledby="training-title">
+  <SectionHead id="training-title" title="TRAINING GROUNDS" kicker="Chapter V · The Academy" icon="🎓" tone="lilac" iconBg="var(--color-amethyst)" />
+
+  <!-- ============ wizard academy banner ============ -->
+  <div data-reveal class="origin-top animate-[sway_6s_ease-in-out_infinite]">
+    <div class="banner-rod mx-2"></div>
+    <div class="banner">
+      <div class="banner__edge">
+        <div class="banner__cloth">
+          <div class="mx-auto mb-6 grid h-16 w-16 place-items-center rounded-full border-4 border-ink bg-gold text-3xl shadow-[0_4px_0_var(--color-ink)]" aria-hidden="true">🏰</div>
+          <ul class="space-y-5">
+            {training.map((t) => (
+              <li class="parchment px-5 py-4">
+                <h3 class="font-display text-[1.3rem] leading-snug text-[#3a1f72]">{t.title}</h3>
+                <p class="mt-1 font-bold italic text-[#5a3a12]">{t.place}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+---
+import SectionHead from "./SectionHead.astro";
+import { experience } from "../data/cv";
+---
+
+<section id="experience" class="relative mx-auto max-w-6xl px-4 py-24" aria-labelledby="experience-title">
+  <SectionHead id="experience-title" title="EXPERIENCE" kicker="Chapter IV · The Road So Far" icon="🧭" tone="gold" iconBg="var(--color-gold)" />
+
+  <div class="relative" data-trail>
+    <!-- the winding dirt path is drawn by JS through every [data-milestone] -->
+    <svg class="quest-path" data-trail-svg aria-hidden="true"></svg>
+
+    <ol class="relative flex flex-col gap-14">
+      <!-- trailhead -->
+      <li class="grid grid-cols-[3.5rem_1fr] items-center gap-3 md:gap-4 md:grid-cols-[1fr_5rem_1fr]" aria-hidden="true">
+        <div class="md:col-start-2 flex justify-center">
+          <span class="milestone" data-milestone>⚑</span>
+        </div>
+        <span class="font-display text-lg tracking-widest text-lilac md:col-start-3">THE JOURNEY BEGINS</span>
+      </li>
+
+      {experience.map((job, i) => {
+        const left = i % 2 === 0;
+        return (
+          <li class="grid grid-cols-[3.5rem_1fr] items-center gap-3 md:gap-4 md:grid-cols-[1fr_5rem_1fr]">
+            <div class:list={["flex justify-center row-start-1 col-start-1 md:col-start-2"]}>
+              <span class="milestone" data-milestone aria-hidden="true">0{i + 1}</span>
+            </div>
+            <article
+              class:list={[
+                "signpost row-start-1 col-start-2 px-4 pb-5 pt-6 sm:px-6 sm:pb-6 sm:pt-7",
+                left ? "md:col-start-1 md:mr-2 md:-rotate-1" : "md:col-start-3 md:ml-2 md:rotate-1",
+              ]}
+              data-reveal
+            >
+              <span class="signpost__nail left-3"></span>
+              <span class="signpost__nail right-3"></span>
+              <span class:list={["signpost-arrow", left ? "is-right" : ""]} aria-hidden="true"></span>
+              <h3 class="text-[clamp(1.4rem,3vw,1.9rem)] leading-tight text-white [text-shadow:0_3px_0_var(--color-ink)]">
+                {job.role}
+              </h3>
+              <p class="mt-1 text-lg font-extrabold italic text-gold [text-shadow:0_2px_0_var(--color-ink)]">{job.org}</p>
+              {job.points.length > 0 && (
+                <ul class="parchment mt-5 space-y-3 px-3.5 py-4 sm:px-5 text-[1rem] font-semibold leading-relaxed">
+                  {job.points.map((pt) => (
+                    <li class="flex gap-3"><span class="mt-0.5 flex-none text-ruby" aria-hidden="true">◆</span><span>{pt}</span></li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          </li>
+        );
+      })}
+
+      <!-- trail end -->
+      <li class="grid grid-cols-[3.5rem_1fr] items-center gap-3 md:gap-4 md:grid-cols-[1fr_5rem_1fr]" aria-hidden="true">
+        <div class="md:col-start-2 flex justify-center">
+          <span class="milestone" data-milestone>…</span>
+        </div>
+        <span class="font-display text-lg tracking-widest text-lilac md:col-start-3">TO BE CONTINUED…</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<style>
+  /* arrow tip of the signpost, pointing at the path */
+  .signpost-arrow {
+    position: absolute;
+    top: 2.2rem;
+    left: -19px;
+    width: 34px;
+    height: 34px;
+    background: url("/textures/wood.svg") 0 0 / 200px 200px, var(--color-wood);
+    border-left: 4px solid var(--color-ink);
+    border-bottom: 4px solid var(--color-ink);
+    transform: rotate(45deg);
+    border-bottom-left-radius: 6px;
+  }
+  @media (min-width: 768px) {
+    .signpost-arrow.is-right {
+      left: auto;
+      right: -19px;
+      border-left: 0;
+      border-bottom: 0;
+      border-top: 4px solid var(--color-ink);
+      border-right: 4px solid var(--color-ink);
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 6px;
+    }
+  }
+</style>

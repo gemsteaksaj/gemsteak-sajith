@@ -1,0 +1,49 @@
+---
+// A cartoon crystal cluster for use INSIDE an <svg>. Origin = base centre of the cluster.
+interface Props {
+  x: number;
+  y: number;
+  s?: number; // scale
+  hue?: "ruby" | "cyan" | "pink" | "amethyst";
+  glow?: boolean;
+  flip?: boolean;
+}
+const { x, y, s = 1, hue = "ruby", glow = true, flip = false } = Astro.props;
+
+const palettes = {
+  ruby: { light: "#ff8aa5", mid: "#e0234e", dark: "#8f0d2f", top: "#ffc2d0" },
+  cyan: { light: "#b9fdff", mid: "#3ff3ff", dark: "#0b8ea1", top: "#ecffff" },
+  pink: { light: "#ffb3d8", mid: "#ff4fa3", dark: "#b0125f", top: "#ffe0f0" },
+  amethyst: { light: "#dcc4ff", mid: "#a66bff", dark: "#5b23b5", top: "#f1e8ff" },
+};
+const p = palettes[hue];
+
+// shards: [dx, rotation, scale]
+const shards: [number, number, number][] = [
+  [-26, -24, 0.62],
+  [24, 20, 0.72],
+  [0, 0, 1],
+  [-8, -8, 0.42],
+];
+const shard = "0,-64 16,-46 16,0 -16,0 -16,-46";
+---
+
+<g
+  transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}
+  filter={glow ? `url(#glow-${hue})` : undefined}
+>
+  {
+    shards.map(([dx, rot, sc]) => (
+      <g transform={`translate(${dx} 0) rotate(${rot}) scale(${sc})`}>
+        <polygon points={shard} fill={p.mid} />
+        <polygon points="0,-64 0,0 -16,0 -16,-46" fill={p.light} />
+        <polygon points="0,-64 16,-46 0,-38" fill={p.top} />
+        <polygon points="0,-64 0,-38 -16,-46" fill="#fff" opacity=".55" />
+        <polygon points="16,-46 16,0 6,0" fill={p.dark} opacity=".8" />
+        <polygon points={shard} fill="none" stroke="#0b0b12" stroke-width="4.5" stroke-linejoin="round" />
+      </g>
+    ))
+  }
+  <!-- rock base -->
+  <path d="M-46,4 Q-40,-14 -18,-8 Q0,-18 22,-8 Q44,-12 48,4 Z" fill="#3a3560" stroke="#0b0b12" stroke-width="4.5" stroke-linejoin="round" />
+</g>

@@ -1,0 +1,49 @@
+---
+import GemLogo from "./GemLogo.astro";
+
+const links = [
+  { href: "#story", label: "Lore" },
+  { href: "#skills", label: "Skill Tree" },
+  { href: "#archives", label: "Archives" },
+  { href: "#experience", label: "Experience" },
+  { href: "#training", label: "Academy" },
+];
+---
+
+<nav class="hud" aria-label="Main menu">
+  <a href="#top" class="flex items-center gap-2 shrink-0" aria-label="Back to main menu">
+    <GemLogo size={40} uid="hud-logo" />
+    <span class="leading-none">
+      <span class="block font-display text-xl tracking-wide text-white [text-shadow:0_3px_0_var(--color-ink)]">GEMSTEAK</span>
+      <span class="block text-[0.65rem] font-extrabold tracking-[0.2em] text-cyan">SAJITH KP</span>
+    </span>
+  </a>
+
+  <ul class="hidden md:flex items-center gap-2.5">
+    {links.map((l) => (
+      <li><a class="btn-stone" href={l.href} data-nav-link>{l.label}</a></li>
+    ))}
+  </ul>
+
+  <button
+    type="button"
+    class="btn-stone md:hidden"
+    aria-expanded="false"
+    aria-controls="hud-menu"
+    data-menu-toggle
+  >
+    <span aria-hidden="true">☰</span> Menu
+  </button>
+
+  <ul
+    id="hud-menu"
+    class="md:hidden absolute right-2 top-[calc(100%+1.1rem)] hidden flex-col gap-2.5 p-3 panel-slate min-w-48"
+    data-menu
+  >
+    {links.map((l) => (
+      <li><a class="btn-stone w-full justify-center" href={l.href} data-nav-link>{l.label}</a></li>
+    ))}
+  </ul>
+
+  <div class="xp-bar" aria-hidden="true"><div class="xp-bar__fill" data-xp></div></div>
+</nav>

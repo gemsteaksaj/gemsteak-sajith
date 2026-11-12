@@ -1,0 +1,61 @@
+---
+// Gemsteak brand mark: steak cut with faceted ruby-crystal meat and grey stone rind.
+// Base shape generated with Google Stitch (design/stitch/logo.svg), refined by hand.
+interface Props {
+  size?: number | string;
+  uid?: string; // unique id prefix when the logo appears more than once on a page
+  class?: string;
+}
+const { size = 48, uid = "gl", class: className = "" } = Astro.props;
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 200 200"
+  role="img"
+  aria-label="Gemsteak logo"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id={`${uid}-ruby`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff4d79" />
+      <stop offset=".5" stop-color="#e0234e" />
+      <stop offset="1" stop-color="#8a0928" />
+    </linearGradient>
+    <linearGradient id={`${uid}-stone`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9c0d0" />
+      <stop offset=".55" stop-color="#7d869b" />
+      <stop offset="1" stop-color="#4f5870" />
+    </linearGradient>
+  </defs>
+  <!-- hard shadow -->
+  <path
+    d="M51,81 C51,46 91,31 136,41 C176,51 191,91 181,131 C171,171 131,191 91,181 C51,171 46,126 51,81 Z"
+    fill="#0b0b12"
+  />
+  <!-- stone rind -->
+  <path
+    d="M45,75 C45,40 85,25 130,35 C170,45 185,85 175,125 C165,165 125,185 85,175 C45,165 40,120 45,75 Z"
+    fill={`url(#${uid}-stone)`}
+    stroke="#0b0b12"
+    stroke-width="8"
+    stroke-linejoin="round"
+  />
+  <!-- rind facets -->
+  <path d="M45,75 L72,70 L85,35 M130,35 L140,62 L175,80 M175,125 L152,130 L130,170 M85,175 L82,150 L48,140" fill="none" stroke="#0b0b12" stroke-width="3" stroke-linecap="round" opacity=".55" />
+  <!-- ruby meat -->
+  <polygon points="65,85 105,50 145,58 160,105 135,150 90,155 60,120" fill={`url(#${uid}-ruby)`} stroke="#0b0b12" stroke-width="6" stroke-linejoin="round" />
+  <polygon points="65,85 105,50 105,95 60,120" fill="#ff5c8a" opacity=".65" />
+  <polygon points="105,50 145,58 120,105 105,95" fill="#ff80a0" opacity=".85" />
+  <polygon points="145,58 160,105 135,150 120,105" fill="#c7123d" opacity=".9" />
+  <polygon points="120,105 135,150 90,155 105,95" fill="#75061f" />
+  <polygon points="60,120 105,95 90,155" fill="#9e0c30" />
+  <polygon points="65,85 105,50 145,58 160,105 135,150 90,155 60,120" fill="none" stroke="#0b0b12" stroke-width="6" stroke-linejoin="round" />
+  <!-- glints -->
+  <polygon points="100,60 108,60 104,78" fill="#fff" opacity=".95" />
+  <circle cx="132" cy="70" r="3.5" fill="#fff" />
+  <!-- marbling crystal -->
+  <ellipse cx="90" cy="88" rx="8" ry="12" transform="rotate(-25 90 88)" fill="#fce7f3" stroke="#0b0b12" stroke-width="4" />
+</svg>

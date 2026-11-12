@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="rubyGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d79"/>
+      <stop offset="50%" stop-color="#e0234e"/>
+      <stop offset="100%" stop-color="#8a0928"/>
+    </linearGradient>
+    <linearGradient id="stoneGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-color="#0b0b12"/>
+    </filter>
+  </defs>
+  <!-- Outer Shadow & Stone Rind -->
+  <path d="M45,75 C45,40 85,25 130,35 C170,45 185,85 175,125 C165,165 125,185 85,175 C45,165 40,120 45,75 Z" fill="url(#stoneGlow)" stroke="#0b0b12" stroke-width="8" stroke-linejoin="round" filter="url(#shadow)"/>
+  <!-- Stone Texture notches -->
+  <path d="M50,90 L60,95 M160,70 L150,80 M140,160 L135,148 M65,150 L75,145" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+  <!-- Faceted Ruby Meat Cut -->
+  <polygon points="65,85 105,50 145,58 160,105 135,150 90,155 60,120" fill="url(#rubyGlow)" stroke="#0b0b12" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Crystal Facet Lines -->
+  <polygon points="65,85 105,50 105,95 60,120" fill="#ff5c8a" opacity="0.6"/>
+  <polygon points="105,50 145,58 120,105 105,95" fill="#ff80a0" opacity="0.8"/>
+  <polygon points="145,58 160,105 135,150 120,105" fill="#c7123d" opacity="0.9"/>
+  <polygon points="120,105 135,150 90,155 105,95" fill="#75061f"/>
+  <polygon points="60,120 105,95 90,155" fill="#9e0c30"/>
+  <!-- Shiny Glints -->
+  <polygon points="102,60 108,60 105,75" fill="#ffffff" opacity="0.9"/>
+  <circle cx="130" cy="70" r="3" fill="#ffffff"/>
+  <!-- Bone / Fat Marbling Crystal Feature -->
+  <ellipse cx="90" cy="85" rx="8" ry="12" transform="rotate(-25 90 85)" fill="#fce7f3" stroke="#0b0b12" stroke-width="4"/>
+</svg>

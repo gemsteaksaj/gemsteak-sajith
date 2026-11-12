@@ -1,0 +1,20 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  kicker: string;
+  icon: string;
+  tone?: "ruby" | "cyan" | "gold" | "lilac" | "pink";
+  iconBg?: string;
+}
+const { id, title, kicker, icon, tone = "ruby", iconBg = "var(--color-ruby)" } = Astro.props;
+const toneClass = tone === "ruby" ? "" : `is-${tone}`;
+---
+
+<header class="section-head" data-reveal>
+  <span class="section-head__icon" style={`background:${iconBg}`} aria-hidden="true">{icon}</span>
+  <div>
+    <h2 id={id} class:list={["title-display text-[clamp(2.4rem,7vw,4.5rem)]", toneClass]} data-text={title}>{title}</h2>
+    <span class="section-head__kicker">{kicker}</span>
+  </div>
+</header>

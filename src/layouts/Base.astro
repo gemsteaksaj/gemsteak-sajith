@@ -1,0 +1,54 @@
+---
+import "@fontsource/lilita-one/400.css";
+import "@fontsource-variable/nunito";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Sajith KP · Gemsteak Studios",
+  description = "Sajith KP — Polymathic Game Developer & Software Engineer, founder of Gemsteak Studios. Unity, C#, React, Electron and local AI tooling.",
+} = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1f1652" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <canvas class="starfield" data-stars aria-hidden="true"></canvas>
+
+    <!-- shared SVG filters (crystal glows) -->
+    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="glow-ruby" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ff3d64" flood-opacity=".75" /></filter>
+        <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#3ff3ff" flood-opacity=".75" /></filter>
+        <filter id="glow-pink" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#ff4fa3" flood-opacity=".75" /></filter>
+        <filter id="glow-amethyst" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#a66bff" flood-opacity=".75" /></filter>
+      </defs>
+    </svg>
+
+    <a href="#story" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-24 focus:z-[60] btn-stone">Skip to content</a>
+
+    <slot />
+
+    <script>
+      import "../scripts/main.ts";
+    </script>
+  </body>
+</html>

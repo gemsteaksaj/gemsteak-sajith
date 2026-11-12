@@ -1,0 +1,47 @@
+---
+import SectionHead from "./SectionHead.astro";
+import GemLogo from "./GemLogo.astro";
+import { skillTree } from "../data/cv";
+
+// grid placement around the central core (desktop): left/right columns, two rows
+const placement = [
+  "lg:col-start-1 lg:row-start-1",
+  "lg:col-start-3 lg:row-start-1",
+  "lg:col-start-1 lg:row-start-2",
+  "lg:col-start-3 lg:row-start-2",
+];
+---
+
+<section id="skills" class="relative mx-auto max-w-6xl px-4 py-24" aria-labelledby="skills-title">
+  <SectionHead id="skills-title" title="SKILL TREE" kicker="Chapter II · Technical Expertise" icon="🌿" tone="cyan" iconBg="var(--color-cyan)" />
+
+  <div class="tree" data-tree>
+    <svg class="tree-vines" data-vines aria-hidden="true"></svg>
+
+    <div class="grid gap-x-10 gap-y-12 lg:grid-cols-[1fr_auto_1fr] lg:grid-rows-2">
+      <div class="tree-core lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center" data-core aria-hidden="true">
+        <div class="tree-core__gem grid place-items-center rounded-full border-4 border-ink bg-[radial-gradient(circle_at_40%_35%,#3b2a7a,#150e3a)] shadow-[0_6px_0_var(--color-ink)]">
+          <GemLogo size={104} uid="tree-core" />
+        </div>
+        <span class="tree-core__label">CORE · LVL 99</span>
+      </div>
+
+      {skillTree.map((branch, i) => (
+        <article class:list={["panel-slate branch", `gem-${branch.gem}`, placement[i]]} data-branch data-reveal aria-labelledby={`branch-${i}`}>
+          <header class="mb-4 flex items-center gap-4 border-b-[3px] border-ink/60 pb-4">
+            <span class="branch__node"><span aria-hidden="true">{branch.icon}</span></span>
+            <div>
+              <span class="text-[0.7rem] font-extrabold tracking-[0.22em] text-lilac">BRANCH 0{i + 1} · {branch.skills.length} SLOTS</span>
+              <h3 id={`branch-${i}`} class="text-[1.45rem] leading-tight text-white [text-shadow:0_3px_0_var(--color-ink)]">{branch.name}</h3>
+            </div>
+          </header>
+          <ul class="flex flex-wrap gap-2.5" aria-label={`${branch.name} skills`}>
+            {branch.skills.map((skill) => (
+              <li class="slot"><span class="slot__pip" aria-hidden="true"></span>{skill}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

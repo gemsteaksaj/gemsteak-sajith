@@ -1,0 +1,587 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GEMSTEAK DESIGN TOKENS
+   Ruby crystal "meat" + faceted stone "rind", thick ink outlines.
+   ============================================================ */
+@theme {
+  --color-ink: #0b0b12;
+  --color-night-0: #0d0826;
+  --color-night-1: #150e3a;
+  --color-night-2: #1f1652;
+  --color-night-3: #2e2070;
+  --color-dusk: #8f7bd8;
+  --color-lilac: #c9b8ff;
+
+  --color-ruby: #e0234e;
+  --color-ruby-dark: #9b0f33;
+  --color-ruby-light: #ff6b8b;
+  --color-pink: #ff4fa3;
+  --color-cyan: #3ff3ff;
+  --color-cyan-dark: #0fa3b8;
+  --color-amethyst: #a66bff;
+  --color-gold: #ffd25e;
+
+  --color-stone: #8a93a6;
+  --color-stone-light: #b9c0d0;
+  --color-stone-dark: #5b6378;
+  --color-slate: #4f5d80;
+  --color-slate-dark: #2c3550;
+
+  --color-parchment: #fbecc8;
+  --color-parchment-dark: #e8cf95;
+  --color-wood: #7a4a23;
+  --color-wood-dark: #4a2a12;
+
+  --font-display: "Lilita One", "Trebuchet MS", system-ui, sans-serif;
+  --font-sans: "Nunito Variable", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-hard: 6px 6px 0 var(--color-ink);
+  --shadow-hard-sm: 4px 4px 0 var(--color-ink);
+}
+
+@property --gem-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    background: var(--color-night-0);
+    color-scheme: dark;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    font-family: var(--font-sans);
+    color: #f3efff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+      radial-gradient(1200px 700px at 80% -10%, rgb(255 79 163 / 0.18), transparent 60%),
+      radial-gradient(900px 600px at 0% 30%, rgb(63 243 255 / 0.08), transparent 60%),
+      linear-gradient(180deg, var(--color-night-3) 0%, var(--color-night-2) 18%, var(--color-night-1) 55%, var(--color-night-0) 100%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--color-ruby); color: white; }
+  :focus-visible {
+    outline: 3px dashed var(--color-cyan);
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
+  h1, h2, h3, .font-display { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.01em; }
+}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+@layer components {
+  /* ---------- star field canvas ---------- */
+  .starfield { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+  /* ---------- display title with thick ink outline ----------
+     Usage: <h2 class="title-display" data-text="SKILL TREE">SKILL TREE</h2>  */
+  /* the element's own text is the thick ink outline; ::after paints the gem gradient on top */
+  .title-display {
+    --fill: linear-gradient(180deg, #ffffff 0%, #ffe3ea 45%, var(--color-ruby-light) 46%, var(--color-ruby) 100%);
+    position: relative;
+    display: inline-block;
+    line-height: 0.95;
+    color: var(--color-ink);
+    -webkit-text-stroke: 0.2em var(--color-ink);
+    text-shadow: 0.06em 0.1em 0 var(--color-ink);
+  }
+  .title-display::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    -webkit-text-stroke: 0;
+    text-shadow: none;
+    background: var(--fill);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    pointer-events: none;
+  }
+  .title-display.is-cyan { --fill: linear-gradient(180deg, #ffffff 0%, #d8fdff 45%, #7ff8ff 46%, var(--color-cyan-dark) 100%); }
+  .title-display.is-gold { --fill: linear-gradient(180deg, #ffffff 0%, #fff3cf 45%, #ffe08a 46%, #e89b1a 100%); }
+  .title-display.is-lilac { --fill: linear-gradient(180deg, #ffffff 0%, #efe7ff 45%, #c7a8ff 46%, #7b45e0 100%); }
+  .title-display.is-pink { --fill: linear-gradient(180deg, #ffffff 0%, #ffe2f1 45%, #ff8cc6 46%, #d81b7a 100%); }
+
+  /* ---------- section heading block ---------- */
+  .section-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.25rem; }
+  .section-head__icon {
+    flex: none;
+    display: grid; place-items: center;
+    width: 3.5rem; height: 3.5rem;
+    font-size: 1.6rem;
+    border: 4px solid var(--color-ink);
+    border-radius: 14px;
+    box-shadow: var(--shadow-hard-sm), inset 0 4px 0 rgb(255 255 255 / 0.35), inset 0 -5px 0 rgb(0 0 0 / 0.25);
+    transform: rotate(-6deg);
+  }
+  .section-head__kicker {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-lilac);
+  }
+
+  /* ---------- outlined surfaces ---------- */
+  .outlined {
+    border: 4px solid var(--color-ink);
+    box-shadow: var(--shadow-hard);
+  }
+
+  .panel-stone {
+    position: relative;
+    border: 4px solid var(--color-ink);
+    border-radius: 22px;
+    color: var(--color-ink);
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.18), rgb(0 0 0 / 0.12)),
+      url("/textures/stone.svg") 0 0 / 240px 240px;
+    box-shadow:
+      var(--shadow-hard),
+      inset 0 6px 0 rgb(255 255 255 / 0.35),
+      inset 0 -8px 0 rgb(0 0 0 / 0.22);
+  }
+  .panel-slate {
+    position: relative;
+    border: 4px solid var(--color-ink);
+    border-radius: 18px;
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.08), rgb(0 0 0 / 0.25)),
+      url("/textures/slate.svg") 0 0 / 240px 240px;
+    box-shadow:
+      var(--shadow-hard),
+      inset 0 5px 0 rgb(255 255 255 / 0.18),
+      inset 0 -7px 0 rgb(0 0 0 / 0.3);
+  }
+
+  /* corner rivets for stone slabs */
+  .rivet {
+    position: absolute;
+    width: 16px; height: 16px;
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 35%, #fff 0 15%, var(--color-gold) 16% 60%, #b37a10 61%);
+  }
+
+  /* ---------- parchment ---------- */
+  .parchment {
+    position: relative;
+    color: #2a1d10;
+    border: 4px solid var(--color-ink);
+    border-radius: 10px;
+    background:
+      radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(150 95 30 / 0.28) 100%),
+      linear-gradient(175deg, #fff6da, var(--color-parchment) 50%, var(--color-parchment-dark));
+    box-shadow: var(--shadow-hard-sm), inset 0 0 0 3px rgb(255 255 255 / 0.45);
+  }
+
+  /* ---------- stone chip (contact bar items) ---------- */
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #f3efff;
+    border: 3px solid var(--color-ink);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.12), rgb(0 0 0 / 0.2)),
+      url("/textures/slate.svg") 0 0 / 180px 180px;
+    box-shadow: 0 5px 0 var(--color-ink), inset 0 3px 0 rgb(255 255 255 / 0.18);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.2s ease;
+  }
+  a.chip:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--color-ink), inset 0 3px 0 rgb(255 255 255 / 0.18), 0 0 18px rgb(63 243 255 / 0.45); }
+  a.chip:active { transform: translateY(5px); box-shadow: 0 0 0 var(--color-ink), inset 0 3px 0 rgb(255 255 255 / 0.18); }
+
+  /* ---------- RUBY GEM BUTTON (faceted, clip-path) ----------
+     <a class="gem-btn"><span class="gem-btn__rim"><span class="gem-btn__face">Text</span></span></a> */
+  .gem-btn {
+    --cut: 18px;
+    display: inline-block;
+    filter: drop-shadow(0 7px 0 var(--color-ink));
+    transition: filter 0.15s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+  .gem-btn__rim {
+    display: block;
+    padding: 4px;
+    background: var(--color-ink);
+    clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% 50%, calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 50%);
+  }
+  .gem-btn__face {
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+    padding: 1.05rem 2.6rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+    letter-spacing: 0.04em;
+    color: #fff;
+    text-shadow: 0 3px 0 var(--color-ink), 2px 0 0 var(--color-ink), -2px 0 0 var(--color-ink), 0 -2px 0 var(--color-ink);
+    clip-path: polygon(calc(var(--cut) - 3px) 0, calc(100% - var(--cut) + 3px) 0, 100% 50%, calc(100% - var(--cut) + 3px) 100%, calc(var(--cut) - 3px) 100%, 0 50%);
+    background:
+      /* facet planes */
+      linear-gradient(115deg, rgb(255 255 255 / 0.45) 0 18%, transparent 18.5%),
+      linear-gradient(245deg, rgb(255 255 255 / 0.18) 0 22%, transparent 22.5%),
+      linear-gradient(0deg, rgb(80 0 20 / 0.45) 0 32%, transparent 32.5%),
+      linear-gradient(180deg, var(--color-ruby-light), var(--color-ruby) 55%, var(--color-ruby-dark));
+    overflow: hidden;
+  }
+  /* glint sweep */
+  .gem-btn__face::after {
+    content: "";
+    position: absolute; inset: -20% auto -20% -40%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.75), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .gem-btn:hover { filter: drop-shadow(0 7px 0 var(--color-ink)) drop-shadow(0 0 18px rgb(255 79 163 / 0.85)); transform: translateY(-2px); }
+  .gem-btn:hover .gem-btn__face::after { left: 120%; }
+  .gem-btn:active { filter: drop-shadow(0 1px 0 var(--color-ink)) drop-shadow(0 0 22px rgb(255 79 163 / 0.9)); transform: translateY(6px); }
+  .gem-btn.is-cyan .gem-btn__face {
+    background:
+      linear-gradient(115deg, rgb(255 255 255 / 0.5) 0 18%, transparent 18.5%),
+      linear-gradient(0deg, rgb(0 60 80 / 0.4) 0 32%, transparent 32.5%),
+      linear-gradient(180deg, #a5fbff, var(--color-cyan) 50%, var(--color-cyan-dark));
+  }
+
+  /* ---------- stone button (gamepad press) ---------- */
+  .btn-stone {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--color-ink);
+    border: 3px solid var(--color-ink);
+    border-radius: 12px;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.3), rgb(0 0 0 / 0.08)),
+      url("/textures/stone.svg") 0 0 / 160px 160px;
+    box-shadow: 0 5px 0 var(--color-ink), inset 0 3px 0 rgb(255 255 255 / 0.45);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .btn-stone:hover { transform: translateY(2px); box-shadow: 0 3px 0 var(--color-ink), inset 0 3px 0 rgb(255 255 255 / 0.45), 0 0 14px rgb(63 243 255 / 0.5); }
+  .btn-stone:active, .btn-stone.is-active { transform: translateY(5px); box-shadow: 0 0 0 var(--color-ink), inset 0 3px 6px rgb(0 0 0 / 0.35); }
+
+  /* ---------- HUD / nav ---------- */
+  .hud {
+    position: fixed; inset: 0.75rem 0.75rem auto; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.6rem;
+    border: 4px solid var(--color-ink);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgb(46 32 112 / 0.92), rgb(21 14 58 / 0.92));
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-hard-sm), inset 0 3px 0 rgb(255 255 255 / 0.12);
+  }
+  .xp-bar {
+    position: absolute; left: 14px; right: 14px; bottom: -11px;
+    height: 10px;
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    background: var(--color-night-0);
+    overflow: hidden;
+  }
+  .xp-bar__fill {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, var(--color-ruby), var(--color-pink), var(--color-cyan));
+  }
+
+  /* ---------- SKILL TREE ---------- */
+  .tree { position: relative; }
+  .tree-vines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
+  .tree-vines .vine-glow { fill: none; stroke: var(--color-cyan); stroke-width: 10; opacity: 0.35; filter: blur(6px); }
+  .tree-vines .vine-ink { fill: none; stroke: var(--color-ink); stroke-width: 9; stroke-linecap: round; }
+  .tree-vines .vine-core {
+    fill: none; stroke: var(--color-cyan); stroke-width: 4; stroke-linecap: round;
+    stroke-dasharray: 2 14;
+    animation: vine-flow 1.6s linear infinite;
+  }
+  @keyframes vine-flow { to { stroke-dashoffset: -32; } }
+
+  .tree-core {
+    position: relative; z-index: 3;
+    display: grid; place-items: center;
+    width: 9rem; height: 9rem;
+    margin-inline: auto;
+  }
+  .tree-core__gem { width: 100%; height: 100%; filter: drop-shadow(0 0 22px rgb(224 35 78 / 0.7)); animation: float 4s ease-in-out infinite; }
+  .tree-core__label {
+    position: absolute; bottom: -0.9rem;
+    padding: 0.15rem 0.7rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+    background: var(--color-gold);
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    box-shadow: 0 3px 0 var(--color-ink);
+    white-space: nowrap;
+  }
+
+  .branch { position: relative; z-index: 1; padding: 1.25rem; }
+  .branch__node {
+    flex: none;
+    display: grid; place-items: center;
+    width: 3rem; height: 3rem;
+    font-size: 1.35rem;
+    border: 4px solid var(--color-ink);
+    transform: rotate(45deg);
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px rgb(255 255 255 / 0.08), 0 0 22px var(--gem-glow);
+    background: linear-gradient(135deg, var(--gem-light) 0 45%, var(--gem-mid) 46% 70%, var(--gem-dark) 71%);
+  }
+  .branch__node > span { transform: rotate(-45deg); filter: drop-shadow(0 2px 0 var(--color-ink)); }
+  .gem-ruby { --gem-light: #ff8aa5; --gem-mid: #e0234e; --gem-dark: #8f0d2f; --gem-glow: rgb(224 35 78 / 0.7); }
+  .gem-cyan { --gem-light: #b9fdff; --gem-mid: #3ff3ff; --gem-dark: #0b8ea1; --gem-glow: rgb(63 243 255 / 0.7); }
+  .gem-pink { --gem-light: #ffb3d8; --gem-mid: #ff4fa3; --gem-dark: #b0125f; --gem-glow: rgb(255 79 163 / 0.7); }
+  .gem-amethyst { --gem-light: #dcc4ff; --gem-mid: #a66bff; --gem-dark: #5b23b5; --gem-glow: rgb(166 107 255 / 0.7); }
+
+  /* inventory slot */
+  .slot {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.8rem 0.45rem 0.5rem;
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    color: #eef1ff;
+    border: 3px solid var(--color-ink);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #1a1f36, #252c4a);
+    box-shadow: inset 0 4px 0 rgb(0 0 0 / 0.45), inset 0 -2px 0 rgb(255 255 255 / 0.08), 0 3px 0 var(--color-ink);
+    transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .slot__pip {
+    flex: none;
+    width: 1.4rem; height: 1.4rem;
+    border: 3px solid var(--color-ink);
+    border-radius: 5px;
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, var(--gem-light) 0 45%, var(--gem-mid) 46% 70%, var(--gem-dark) 71%);
+  }
+  .slot:hover {
+    transform: translateY(-3px);
+    box-shadow: inset 0 4px 0 rgb(0 0 0 / 0.45), 0 6px 0 var(--color-ink), 0 0 18px var(--gem-glow);
+  }
+  .slot:hover .slot__pip { animation: pip-spin 0.6s ease; }
+  @keyframes pip-spin { to { transform: rotate(405deg); } }
+
+  /* ---------- ARCHIVES: crystal-bordered level cards ---------- */
+  .level-card {
+    --gem-angle: 0deg;
+    position: relative;
+    padding: 8px;
+    border: 4px solid var(--color-ink);
+    border-radius: 22px;
+    background: conic-gradient(from var(--gem-angle), var(--color-ruby), var(--color-pink), var(--color-amethyst), var(--color-cyan), var(--color-ruby));
+    box-shadow: var(--shadow-hard);
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    animation: gem-spin 8s linear infinite;
+    animation-play-state: paused;
+  }
+  .level-card:hover, .level-card:focus-within {
+    animation-play-state: running;
+    transform: translateY(-6px) rotate(-0.6deg);
+    box-shadow: 6px 12px 0 var(--color-ink), 0 0 36px rgb(255 79 163 / 0.55), 0 0 60px rgb(63 243 255 / 0.25);
+  }
+  @keyframes gem-spin { to { --gem-angle: 360deg; } }
+  .level-card__inner {
+    position: relative;
+    height: 100%;
+    border: 4px solid var(--color-ink);
+    border-radius: 14px;
+    overflow: hidden;
+    background:
+      radial-gradient(80% 60% at 50% 30%, rgb(166 107 255 / 0.25), transparent 70%),
+      linear-gradient(180deg, #1c1544, #0f0b2a);
+  }
+
+  /* ---------- EXPERIENCE: dirt path + signposts ---------- */
+  .quest-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .signpost {
+    position: relative;
+    border: 4px solid var(--color-ink);
+    border-radius: 14px;
+    color: #fff3dd;
+    background:
+      repeating-linear-gradient(180deg, transparent 0 22px, rgb(0 0 0 / 0.18) 22px 25px),
+      linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(0 0 0 / 0.15)),
+      url("/textures/wood.svg") 0 0 / 200px 200px;
+    box-shadow: var(--shadow-hard), inset 0 4px 0 rgb(255 255 255 / 0.18), inset 0 -6px 0 rgb(0 0 0 / 0.3);
+  }
+  .signpost__nail {
+    position: absolute; top: 10px;
+    width: 10px; height: 10px;
+    border-radius: 999px;
+    background: #2b2b33;
+    box-shadow: inset 1px 1px 0 rgb(255 255 255 / 0.4);
+  }
+  .milestone {
+    display: grid; place-items: center;
+    width: 3.25rem; height: 3.25rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    border: 4px solid var(--color-ink);
+    border-radius: 45% 55% 40% 60% / 55% 45% 55% 45%;
+    background: linear-gradient(160deg, rgb(255 255 255 / 0.35), rgb(0 0 0 / 0.15)), url("/textures/stone.svg") 0 0 / 120px 120px;
+    box-shadow: 0 5px 0 var(--color-ink), 0 0 0 6px rgb(63 243 255 / 0.18), 0 0 26px rgb(63 243 255 / 0.5);
+  }
+
+  /* ---------- TRAINING GROUNDS: hanging academy banner ---------- */
+  .banner-rod {
+    position: relative; z-index: 2;
+    height: 18px;
+    border: 4px solid var(--color-ink);
+    border-radius: 999px;
+    background: linear-gradient(180deg, #b0743d, var(--color-wood) 60%, var(--color-wood-dark));
+    box-shadow: 0 4px 0 var(--color-ink);
+  }
+  .banner-rod::before, .banner-rod::after {
+    content: "";
+    position: absolute; top: 50%;
+    width: 26px; height: 26px;
+    border: 4px solid var(--color-ink);
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 35%, #fff 0 12%, var(--color-gold) 13% 60%, #b37a10 61%);
+    transform: translateY(-50%);
+  }
+  .banner-rod::before { left: -16px; }
+  .banner-rod::after { right: -16px; }
+  .banner {
+    --tail: 54px;
+    position: relative;
+    margin: -6px 1.25rem 0;
+    filter: drop-shadow(6px 6px 0 var(--color-ink));
+  }
+  .banner__edge {
+    padding: 0 4px 4px;
+    background: var(--color-ink);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - var(--tail)), 0 100%);
+  }
+  .banner__cloth {
+    padding: 2.25rem 1.5rem calc(var(--tail) + 2rem);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - var(--tail) + 6px), 0 100%);
+    background:
+      linear-gradient(90deg, transparent 0 14px, var(--color-gold) 14px 20px, transparent 20px calc(100% - 20px), var(--color-gold) calc(100% - 20px) calc(100% - 14px), transparent calc(100% - 14px)),
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 0.04) 0 2px, transparent 2px 9px),
+      linear-gradient(180deg, #4b2aa8, #2e1a78 60%, #24125e);
+  }
+
+  /* ---------- GUILDS: badge board ---------- */
+  .board {
+    position: relative;
+    padding: 14px;
+    border: 4px solid var(--color-ink);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.1), rgb(0 0 0 / 0.2)), url("/textures/wood.svg") 0 0 / 200px 200px;
+    box-shadow: var(--shadow-hard), inset 0 4px 0 rgb(255 255 255 / 0.15);
+  }
+  .board__cork {
+    border: 4px solid var(--color-ink);
+    border-radius: 10px;
+    padding: 1.75rem 1.25rem;
+    background-color: #b98a55;
+    background-image:
+      radial-gradient(rgb(90 50 20 / 0.35) 1.2px, transparent 1.6px),
+      radial-gradient(rgb(255 230 190 / 0.25) 1px, transparent 1.4px);
+    background-size: 9px 9px, 13px 13px;
+    background-position: 0 0, 4px 6px;
+    box-shadow: inset 0 6px 12px rgb(0 0 0 / 0.35);
+  }
+  .badge-medal {
+    flex: none;
+    position: relative;
+    display: grid; place-items: center;
+    width: 4.25rem; height: 4.25rem;
+    font-size: 1.9rem;
+    border: 4px solid var(--color-ink);
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 30%, #fff6c9 0 12%, var(--color-gold) 13% 55%, #c98a12 56% 100%);
+    box-shadow: 0 5px 0 var(--color-ink), inset 0 0 0 5px rgb(255 255 255 / 0.25);
+  }
+  .badge-medal.is-cyan { background: radial-gradient(circle at 35% 30%, #e6feff 0 12%, var(--color-cyan) 13% 55%, var(--color-cyan-dark) 56%); }
+  .badge-medal::before, .badge-medal::after {
+    content: "";
+    position: absolute; top: 85%;
+    width: 18px; height: 30px;
+    border: 3px solid var(--color-ink);
+    background: var(--color-ruby);
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+  }
+  .badge-medal::before { left: 14px; transform: rotate(14deg); }
+  .badge-medal::after { right: 14px; transform: rotate(-14deg); background: var(--color-pink); }
+  .pin {
+    position: absolute; top: -10px; left: 50%;
+    width: 20px; height: 20px;
+    translate: -50% 0;
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 35%, #fff 0 15%, var(--color-ruby) 16%);
+    box-shadow: 0 3px 0 var(--color-ink);
+  }
+
+  /* ---------- hero misc ---------- */
+  .ribbon {
+    position: relative;
+    display: inline-block;
+    padding: 0.6rem 1.6rem;
+    font-weight: 900;
+    font-size: clamp(0.92rem, 2.2vw, 1.25rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #2a1d10;
+    border: 4px solid var(--color-ink);
+    background: linear-gradient(180deg, #fff6da, var(--color-parchment) 55%, var(--color-parchment-dark));
+    box-shadow: var(--shadow-hard-sm);
+    transform: rotate(-1.5deg);
+  }
+  .scroll-hint { animation: bob 1.8s ease-in-out infinite; }
+  .sparkle {
+    position: absolute;
+    width: 14px; height: 14px;
+    background: var(--c, var(--color-cyan));
+    clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+    filter: drop-shadow(0 0 6px var(--c, var(--color-cyan)));
+    animation: twinkle var(--d, 2.4s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+}
+
+@media (min-width: 768px) {
+  .milestone { width: 4rem; height: 4rem; font-size: 1.4rem; }
+}
+
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 8px; } }
+@keyframes twinkle { 0%, 100% { opacity: 0.25; scale: 0.6; } 50% { opacity: 1; scale: 1.1; } }
+@keyframes sway { 0%, 100% { rotate: -0.6deg; } 50% { rotate: 0.6deg; } }
+@keyframes loading-bar { from { background-position: 0 0; } to { background-position: 56px 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}

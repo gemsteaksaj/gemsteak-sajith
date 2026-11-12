@@ -1,0 +1,23 @@
+Single-page personal portfolio / interactive CV for "Sajith KP", founder of Gemsteak Studios. Style: whimsical 2D vector fantasy indie game UI (tower-defense / RPG title screen). Twilight starry gradient background (deep blue to pastel purple). Every panel, card and button has a thick 4px black cartoon outline and a hard offset black shadow. Ruby-red faceted crystal accents, neon pink and glowing cyan highlights, grey/slate-blue faceted stone panels. Chunky playful display headings with black stroke.
+
+Sections, top to bottom, using this exact text:
+
+1. HERO "Main Menu": parallax magical twilight landscape with glowing crystals and a distant castle silhouette. Huge stylized title "Sajith KP". Subtitle "Polymathic Game Developer & Software Engineer". Contact bar as stone chips: "📍 Ernakulam, Kerala, India | 📞 +91 8075592650 | ✉️ sajith.kp.2002@gmail.com | 📺 YouTube: Gemsteak / stargon_monk". Ruby-red faceted crystal button: "Start Quest (View CV)".
+
+2. "MY STORY / BIOGRAPHY": huge grey stone slab like an RPG quest board, containing: "I am a software engineer and game developer with an interdisciplinary approach, blending game architecture, mathematical systems, and AI-native workflows. As the founder of Gemsteak Studios, I take a first-principles approach to software and game design—breaking down complex mechanics, attribute scaling math, and procedural generation before building robust prototypes. I specialize in 2D/3D game development, full-stack desktop/web applications, and leveraging offline, local AI development stacks to build private, self-reliant tools."
+
+3. "SKILL TREE": four node clusters connected by glowing cyan vines; each skill shown as an inventory slot chip.
+- Game Development & Architecture: Unity, C#, 2D/3D Architecture, Procedural Generation, Mechanics Design, State Machines.
+- Web & Mobile Engineering: React, React Native, Expo, TypeScript, JavaScript, Node.js, Express, Django REST Framework (DRF).
+- Desktop App Development: Electron.js, Full offline-first architectures.
+- AI & Machine Learning: Local LLM inference, CUDA acceleration, PyTorch, OpenCV, Streamlit, GGUF quantized models, LanceDB vector databases, Claude MCP integrations, AI-native "vibe coding" workflows.
+
+4. "THE ARCHIVES": grid of 3 locked "Level Select" cards with glowing crystal borders and padlock icons, and the message "Archives currently locked. New levels loading soon..."
+
+5. "EXPERIENCE": a winding dirt path down the page with wooden signposts as timeline nodes.
+- Founder & Lead Developer | Gemsteak Studios — "Lead the technical architecture, game mechanics design, and original lore development for indie titles like The Quill Archives / Flare Quills." and "Design custom 16-bit/32-bit pixel art and vector graphics for character sprites and environments."
+- Co-Founder & Developer | Produit Academy
+
+6. Split section: left "TRAINING GROUNDS" as a wizard academy hanging banner: "Bachelor of Technology in Computer Science | TKM College of Engineering, Kollam" and "Diploma in Computer Science | AKNM Government Polytechnic College, Thirurangadi". Right "GUILDS & ACHIEVEMENTS" as an adventurer badge board: "1st Prize Winner: State Scratch Programming Competition at Shastrolsavam (2020)." and "Member: CROB TKMCE (Robotics Club), organizing events including the TKMCE Kerala Robocon '26."
+
+Footer: small Gemsteak logo (a steak shape with faceted ruby crystal meat and grey stone rind), "© Gemsteak Studios".
