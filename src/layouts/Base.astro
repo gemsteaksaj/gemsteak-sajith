@@ -22,7 +22,9 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#1f1652" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
