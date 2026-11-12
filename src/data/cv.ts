@@ -3,7 +3,7 @@
 
 export const hero = {
   title: "Sajith KP",
-  subtitle: "Polymathic Game Developer & Software Engineer",
+  subtitle: "Game Developer & Software Engineer",
   contacts: [
     { icon: "📍", label: "Ernakulam, Kerala, India", href: null },
     { icon: "📞", label: "+91 8075592650", href: "tel:+918075592650" },
