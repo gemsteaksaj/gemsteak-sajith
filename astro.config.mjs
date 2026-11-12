@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  // Set this to your real domain once it's live on Vercel (used for canonical URLs / sitemap).
-  site: "https://gemsteak.vercel.app",
+  // Production URL on Vercel (used for canonical URLs / sitemap). Update if you add a custom domain.
+  site: "https://gemsteak-sajith.vercel.app",
   vite: {
     plugins: [tailwindcss()],
   },
