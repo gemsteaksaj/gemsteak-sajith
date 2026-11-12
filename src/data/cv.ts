@@ -86,7 +86,9 @@ export const experience: Job[] = [
     points: [
       "Lead the technical architecture, game mechanics design, and original lore development for indie titles like The Quill Archives / Flare Quills.",
       "Design custom 16-bit/32-bit pixel art and vector graphics for character sprites and environments.",
+      "Run the studio's Instagram (\"Steak you worth it, daily dose of creativity\"), sharing game development progress, Flare Quills curiosities, AI exploration, and philosophy and quotes.",
     ],
+    links: [{ label: "Instagram", href: "https://www.instagram.com/gemsteak/" }],
   },
   {
     role: "Team Member",
