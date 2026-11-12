@@ -97,6 +97,24 @@ export const projects: Project[] = [
     tags: ["Python", "Django", "SQLite", "Bootstrap", "HTML"],
     links: [{ label: "Source", href: "https://github.com/sajith007423/hirehive" }],
   },
+  {
+    title: "Flare Quill Collection",
+    blurb:
+      "A pixel-art compendium for an original roster of 127 collectible fighters, the Flare Quills, spread across 13 tribes and 14 regions. Every card carries its ember cost, HP, mana, rarity, two powers, craftable resources, an origin story and a 99-level upgrade chart. Players browse by search, tribe filter, sort order or a clickable world map, and open any card for its full stats.",
+    year: "2026",
+    status: "Personal Project",
+    tags: ["JavaScript", "HTML", "CSS", "Pixel Art UI", "Game Design"],
+    links: [{ label: "Explore", href: "https://flare-quills.vercel.app/" }],
+  },
+  {
+    title: "NeuroNexus",
+    blurb:
+      "A brain-training arcade of 20 mini-games, from Schulte tables, the Chimp Test and Stroop challenges to Tower of Hanoi, spatial rotation and task switching. Each round can be tuned with themed icon sets, grids from 2x2 to 10x10 and different grid shapes. Three arcade games run on Kaboom.js, scores are saved to a Django backend through a JSON API, and there is a light and dark theme.",
+    year: "2026",
+    status: "Personal Project",
+    tags: ["Python", "Django", "JavaScript", "Kaboom.js", "HTML", "CSS"],
+    links: [{ label: "Play", href: "https://multi-game-delta.vercel.app/" }],
+  },
   // Template: copy, uncomment and fill in.
   // {
   //   title: "The Quill Archives",
