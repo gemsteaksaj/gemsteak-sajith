@@ -134,5 +134,16 @@ export const guilds: Guild[] = [
     role: "Execom",
     detail: "Organizing events including the TKMCE Kerala Robocon '26.",
   },
+  {
+    icon: "⚙️",
+    tier: "ruby",
+    name: "NAUKA '23 Tech Fest",
+    role: "Volunteer Team",
+    detail:
+      "Volunteered for the state-level tech fest of AKNM Government Polytechnic College, Thirurangadi (Chelari, Malappuram): technical and fun events, seminars, workshops and a fashion show.",
+    period: "2023",
+    // The fest's volunteer team post; the fest's own page is https://www.instagram.com/naukatechfest.in/
+    href: "https://www.instagram.com/p/Cx5fiLrv98o/",
+  },
   // { icon: "🎮", tier: "ruby", name: "Some Game Dev Community", role: "Member", period: "2025 – Present", href: "https://..." },
 ];
