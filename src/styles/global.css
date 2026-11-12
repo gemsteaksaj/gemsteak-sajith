@@ -419,6 +419,127 @@
       linear-gradient(180deg, #1c1544, #0f0b2a);
   }
 
+  /* ---------- STORY: "Player 1" character card ----------
+     --rx/--ry tilt and --mx/--my foil position are set on pointer move by main.ts */
+  .player-card {
+    --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%;
+    position: relative;
+    margin: 0;
+    perspective: 900px;
+  }
+  .player-card__tilt {
+    transform: rotate(1.5deg) rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .player-card.is-tilting .player-card__tilt { transition-duration: 0.1s; }
+  .player-card__frame {
+    --gem-angle: 0deg;
+    padding: 8px;
+    border: 4px solid var(--color-ink);
+    border-radius: 22px;
+    background: conic-gradient(from var(--gem-angle), var(--color-ruby), var(--color-pink), var(--color-amethyst), var(--color-cyan), var(--color-ruby));
+    box-shadow: var(--shadow-hard), 0 0 34px rgb(224 35 78 / 0.35);
+    animation: gem-spin 10s linear infinite;
+    transition: box-shadow 0.3s ease;
+  }
+  .player-card:hover .player-card__frame {
+    box-shadow: 6px 10px 0 var(--color-ink), 0 0 40px rgb(255 79 163 / 0.6), 0 0 70px rgb(63 243 255 / 0.3);
+  }
+  .player-card__inner {
+    overflow: hidden;
+    border: 4px solid var(--color-ink);
+    border-radius: 14px;
+    background:
+      radial-gradient(90% 60% at 50% 0%, rgb(166 107 255 / 0.25), transparent 70%),
+      linear-gradient(180deg, #1c1544, #0f0b2a);
+  }
+  .player-card__window {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border-bottom: 4px solid var(--color-ink);
+    background: var(--color-night-1);
+  }
+  .player-card__window::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 3px rgb(255 255 255 / 0.22), inset 0 -70px 50px -30px rgb(13 8 38 / 0.6);
+  }
+  /* 125% wide inside the 4:5 window = a head-to-knees three-quarter crop of the full-length photo */
+  .player-card__photo {
+    display: block;
+    width: 125%;
+    max-width: none;
+    height: auto;
+    transform-origin: 40% 25%;
+    transition: scale 0.6s ease;
+  }
+  .player-card:hover .player-card__photo { scale: 1.04; }
+  /* holographic foil that follows the pointer */
+  .player-card__shine {
+    position: absolute; inset: 0; z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    background:
+      radial-gradient(circle at var(--mx) var(--my), rgb(255 255 255 / 0.7), transparent 45%),
+      linear-gradient(115deg, transparent 20%, rgb(63 243 255 / 0.55) 38%, rgb(255 79 163 / 0.55) 52%, rgb(255 210 94 / 0.45) 64%, transparent 82%);
+    background-size: 100% 100%, 260% 260%;
+    background-position: 0 0, var(--mx) var(--my);
+    transition: opacity 0.35s ease;
+  }
+  .player-card:hover .player-card__shine { opacity: 1; }
+  .player-card__tag {
+    position: absolute; top: 10px; left: 10px; z-index: 2;
+    padding: 0.05rem 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    background: var(--color-gold);
+    border: 3px solid var(--color-ink);
+    border-radius: 10px;
+    box-shadow: 0 3px 0 var(--color-ink), inset 0 2px 0 rgb(255 255 255 / 0.5);
+    transform: rotate(-6deg);
+  }
+  .player-card__info { padding: 0.85rem 1rem 1.05rem; }
+  .player-card__name {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    color: #fff;
+    text-shadow: 0 3px 0 var(--color-ink), 2px 0 0 var(--color-ink), -2px 0 0 var(--color-ink), 0 -2px 0 var(--color-ink);
+  }
+  .player-card__stats { display: grid; gap: 0.35rem; margin-top: 0.7rem; }
+  .player-card__stats > div { display: flex; align-items: baseline; gap: 0.5rem; }
+  .player-card__stats dt {
+    flex: none;
+    width: 3.4rem;
+    font-size: 0.66rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+  }
+  .player-card__stats dd { font-size: 0.84rem; font-weight: 800; line-height: 1.25; color: #eef1ff; }
+  .player-card__ready {
+    display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+    width: fit-content;
+    margin: 1.4rem auto 0;
+    padding: 0.25rem 0.9rem;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    color: var(--color-gold);
+    background: var(--color-night-0);
+    border: 3px solid var(--color-ink);
+    border-radius: 999px;
+    box-shadow: 0 3px 0 var(--color-ink);
+  }
+  .player-card__ready > span { animation: blink 1.1s steps(2, jump-none) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
   /* ---------- EXPERIENCE: dirt path + signposts ---------- */
   .quest-path { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   .signpost {

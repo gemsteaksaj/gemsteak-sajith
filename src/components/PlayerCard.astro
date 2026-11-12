@@ -1,0 +1,53 @@
+---
+import { Picture } from "astro:assets";
+import photo from "../assets/sajith.jpg";
+import { player } from "../data/cv";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<!-- "Player 1" character-select card: crystal frame, holo foil on hover, pointer tilt (src/scripts/main.ts) -->
+<figure class:list={["player-card", className]} data-player-card>
+  <span class="sparkle" style="left:-10px;top:12%;--c:var(--color-cyan);--d:2.4s" aria-hidden="true"></span>
+  <span class="sparkle" style="right:-12px;top:46%;--c:var(--color-gold);--d:2.9s;--delay:.7s" aria-hidden="true"></span>
+  <span class="sparkle" style="left:8%;bottom:16%;--c:var(--color-pink);--d:2.2s;--delay:1.2s" aria-hidden="true"></span>
+
+  <div class="player-card__tilt">
+    <div class="player-card__frame">
+      <div class="player-card__inner">
+        <div class="player-card__window">
+          <Picture
+            src={photo}
+            alt={player.alt}
+            formats={["avif", "webp"]}
+            widths={[320, 480, 640, 800]}
+            sizes="(min-width: 1024px) 22rem, 20rem"
+            quality={80}
+            loading="lazy"
+            decoding="async"
+            class="player-card__photo"
+          />
+          <span class="player-card__shine" aria-hidden="true"></span>
+          <span class="player-card__tag" aria-hidden="true">{player.tag}</span>
+        </div>
+
+        <figcaption class="player-card__info">
+          <p class="player-card__name">{player.name}</p>
+          <dl class="player-card__stats">
+            {player.stats.map((s) => (
+              <div>
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </figcaption>
+      </div>
+    </div>
+  </div>
+
+  <p class="player-card__ready" aria-hidden="true"><span>▶</span> {player.ready}</p>
+</figure>

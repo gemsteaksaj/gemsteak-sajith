@@ -310,11 +310,34 @@ function initMotion() {
   });
 }
 
+/* ------------------------------------------------------------------ player card tilt + foil */
+function initPlayerCard() {
+  const card = document.querySelector<HTMLElement>("[data-player-card]");
+  if (!card || reduceMotion || !matchMedia("(pointer: fine)").matches) return;
+  const props = ["--rx", "--ry", "--mx", "--my"];
+
+  card.addEventListener("pointermove", (e) => {
+    const r = card.getBoundingClientRect();
+    const px = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1);
+    const py = Math.min(Math.max((e.clientY - r.top) / r.height, 0), 1);
+    card.classList.add("is-tilting");
+    card.style.setProperty("--ry", `${(px - 0.5) * 16}deg`);
+    card.style.setProperty("--rx", `${(0.5 - py) * 12}deg`);
+    card.style.setProperty("--mx", `${px * 100}%`);
+    card.style.setProperty("--my", `${py * 100}%`);
+  });
+  card.addEventListener("pointerleave", () => {
+    card.classList.remove("is-tilting");
+    for (const p of props) card.style.removeProperty(p);
+  });
+}
+
 /* ------------------------------------------------------------------ boot */
 initStars();
 initHud();
 initMotion();
 initVines();
 initTrail();
+initPlayerCard();
 // fonts change layout metrics -> recompute trigger positions once they're in
 document.fonts?.ready.then(() => ScrollTrigger.refresh());

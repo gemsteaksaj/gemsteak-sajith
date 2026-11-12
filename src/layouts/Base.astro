@@ -2,6 +2,9 @@
 import "@fontsource/lilita-one/400.css";
 import "@fontsource-variable/nunito";
 import "../styles/global.css";
+import { getImage } from "astro:assets";
+import photo from "../assets/sajith.jpg";
+import { player } from "../data/cv";
 
 interface Props {
   title?: string;
@@ -12,6 +15,11 @@ const {
   description = "Sajith KP — Game Developer & Software Engineer, founder of Gemsteak Studios. Unity, C#, React, Electron and local AI tooling.",
 } = Astro.props;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+// link-preview image: the portrait cropped from the top so the face stays in frame
+// (Astro never upscales, so cap at the photo's own width and keep the 1.91:1 share ratio)
+const ogWidth = Math.min(1200, photo.width);
+const og = await getImage({ src: photo, width: ogWidth, height: Math.round(ogWidth / 1.905), fit: "cover", position: "top", format: "jpg", quality: 82 });
+const ogImage = Astro.site ? new URL(og.src, Astro.site).href : og.src;
 ---
 
 <!doctype html>
@@ -30,7 +38,12 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(og.attributes.width)} />
+    <meta property="og:image:height" content={String(og.attributes.height)} />
+    <meta property="og:image:alt" content={player.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <canvas class="starfield" data-stars aria-hidden="true"></canvas>

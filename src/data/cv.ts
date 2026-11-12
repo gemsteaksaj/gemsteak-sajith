@@ -19,6 +19,19 @@ export const story = {
     "I am a software engineer and game developer with an interdisciplinary approach, blending game architecture, mathematical systems, and AI-native workflows. As the founder of Gemsteak Studios, I take a first-principles approach to software and game design—breaking down complex mechanics, attribute scaling math, and procedural generation before building robust prototypes. I specialize in 2D game development, full-stack desktop/web applications, and leveraging offline, local AI development stacks to build private, self-reliant tools.",
 };
 
+/** "Player 1" character card shown beside the story (photo lives in src/assets/sajith.jpg). */
+export const player = {
+  tag: "P1",
+  name: "Sajith KP",
+  alt: "Sajith KP in a blue-and-white printed shirt and dark wide-leg jeans, leaning against a glass and timber wall with one hand in their hair.",
+  stats: [
+    { label: "Class", value: "Game Dev · Software Engineer" },
+    { label: "Guild", value: "Gemsteak Studios — Founder" },
+    { label: "Realm", value: "Malappuram, Kerala" },
+  ],
+  ready: "PLAYER 1 READY",
+};
+
 export type SkillBranch = {
   name: string;
   icon: string;
